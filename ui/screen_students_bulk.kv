@@ -1,0 +1,38 @@
+#:kivy 2.0
+<StudentsBulkScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: 16
+        spacing: 8
+        Label:
+            text: "Массовое добавление студентов"
+            font_size: 20
+            size_hint_y: None
+            height: 40
+        Label:
+            text: root.message
+            size_hint_y: None
+            height: 28
+        Spinner:
+            id: group_spinner
+            text: "Выберите группу"
+            values: root.groups
+            size_hint_y: None
+            height: 44
+            on_text: root.select_group(self.text)
+        Label:
+            text: "Каждая строка — один студент (ФИО):"
+            size_hint_y: None
+            height: 24
+        TextInput:
+            id: bulk_input
+            hint_text: "Иванов Иван\nПетров Пётр\n..."
+        BoxLayout:
+            size_hint_y: None
+            height: 44
+            Button:
+                text: "Сохранить список"
+                on_release: root.save_bulk(bulk_input.text)
+            Button:
+                text: "Назад"
+                on_release: root.manager.current = "home"

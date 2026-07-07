@@ -1,0 +1,49 @@
+#:kivy 2.0
+<GroupsScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: 16
+        spacing: 8
+        Label:
+            text: "Группы и студенты"
+            font_size: 20
+            size_hint_y: None
+            height: 40
+        Label:
+            text: root.message
+            size_hint_y: None
+            height: 28
+        BoxLayout:
+            size_hint_y: None
+            height: 44
+            TextInput:
+                id: new_group
+                hint_text: "Название новой группы"
+            Button:
+                text: "Создать группу"
+                size_hint_x: None
+                width: 160
+                on_release: root.create_group(new_group.text); new_group.text = ""
+        Spinner:
+            id: group_spinner
+            text: "Выберите группу"
+            values: root.groups
+            size_hint_y: None
+            height: 44
+            on_text: root.select_group(self.text)
+        BoxLayout:
+            size_hint_y: None
+            height: 44
+            TextInput:
+                id: new_student
+                hint_text: "ФИО студента"
+            Button:
+                text: "Добавить студента"
+                size_hint_x: None
+                width: 160
+                on_release: root.add_one_student(new_student.text); new_student.text = ""
+        Button:
+            text: "Назад"
+            size_hint_y: None
+            height: 44
+            on_release: root.manager.current = "home"

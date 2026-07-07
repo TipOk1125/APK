@@ -1,0 +1,68 @@
+#:kivy 2.0
+<SubjectsScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: 16
+        spacing: 6
+        Label:
+            text: "Предметы и расписание"
+            font_size: 20
+            size_hint_y: None
+            height: 36
+        Label:
+            text: root.message
+            size_hint_y: None
+            height: 26
+        Spinner:
+            text: "Выберите группу"
+            values: root.groups
+            size_hint_y: None
+            height: 40
+            on_text: root.select_group(self.text)
+        BoxLayout:
+            size_hint_y: None
+            height: 40
+            TextInput:
+                id: subj_name
+                hint_text: "Название предмета"
+            TextInput:
+                id: subj_planned
+                hint_text: "План (занятий)"
+                input_filter: "int"
+                size_hint_x: None
+                width: 130
+            Button:
+                text: "Создать"
+                size_hint_x: None
+                width: 100
+                on_release: root.create_subject(subj_name.text, subj_planned.text); subj_name.text=""; subj_planned.text=""
+        Spinner:
+            text: "Выберите предмет"
+            values: root.subjects
+            size_hint_y: None
+            height: 40
+            on_text: root.select_subject(self.text)
+        Label:
+            text: "Слот расписания:"
+            size_hint_y: None
+            height: 24
+        BoxLayout:
+            size_hint_y: None
+            height: 40
+            Spinner:
+                id: wd
+                text: "Пн"
+                values: root.weekdays
+            TextInput:
+                id: slot_time
+                hint_text: "HH:MM"
+            Button:
+                text: "Добавить слот"
+                size_hint_x: None
+                width: 130
+                on_release: root.add_slot(wd.text, slot_time.text)
+        Button:
+            text: "Назад"
+            size_hint_y: None
+            height: 40
+            on_release: root.manager.current = "home"

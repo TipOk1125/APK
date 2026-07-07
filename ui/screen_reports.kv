@@ -1,0 +1,54 @@
+#:kivy 2.0
+<ReportsScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: 12
+        spacing: 6
+        Label:
+            text: "Отчёты и ведомость"
+            font_size: 20
+            size_hint_y: None
+            height: 34
+        Label:
+            text: root.message
+            size_hint_y: None
+            height: 26
+        BoxLayout:
+            size_hint_y: None
+            height: 40
+            Spinner:
+                text: "Группа"
+                values: root.groups
+                on_text: root.select_group(self.text)
+            Spinner:
+                text: "Предмет"
+                values: root.subjects
+                on_text: root.select_subject(self.text)
+        BoxLayout:
+            size_hint_y: None
+            height: 40
+            Button:
+                text: "Ведомость"
+                on_release: root.show_gradebook()
+            Button:
+                text: "Учёт занятий"
+                on_release: root.show_accounting()
+        BoxLayout:
+            size_hint_y: None
+            height: 40
+            Button:
+                text: "Экспорт CSV"
+                on_release: root.export("csv")
+            Button:
+                text: "Экспорт PDF"
+                on_release: root.export("pdf")
+            Button:
+                text: "Назад"
+                on_release: root.manager.current = "home"
+        ScrollView:
+            BoxLayout:
+                id: report_box
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 2

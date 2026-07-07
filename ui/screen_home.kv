@@ -1,0 +1,33 @@
+#:kivy 2.0
+<HomeScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: 16
+        spacing: 10
+        Label:
+            text: "Учёт занятий"
+            font_size: 24
+            size_hint_y: None
+            height: 48
+        Label:
+            text: root.status
+            size_hint_y: None
+            height: 32
+        Button:
+            text: "Группы и студенты"
+            on_release: root.manager.current = "groups"
+        Button:
+            text: "Массовое добавление студентов"
+            on_release: root.manager.current = "students_bulk"
+        Button:
+            text: "Предметы и расписание"
+            on_release: root.manager.current = "subjects"
+        Button:
+            text: "Отметить занятие"
+            on_release: root.manager.current = "mark"
+        Button:
+            text: "Отчёты и ведомость"
+            on_release: root.manager.current = "reports"
+        Button:
+            text: "Экспорт расписания в календарь (.ics)"
+            on_release: root.export_schedule()
